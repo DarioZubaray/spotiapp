@@ -12,10 +12,18 @@ export class SpotifyService {
 
   getRequest() {
     const headers = new HttpHeaders ({
-      'Authorization':'Bearer BQAOoKATZeIAl8JluC_o7Tii-YuYNcFrwjPu7DNSXG025fllRuFDzl-zCkLQPR1Xf5bm7gOLIN1bGILP23_rssfEMS9PH-zdrhZZPT0TwIlnmmXPdVyqrWUHNr8owJV4BcqhIyeqRYPNgcjlw7wR3amr7AGnAl9Tsw'
+      'Authorization':'Bearer BQD94wBXjF-bSfqYEihe1XHLsK80I1L8iqGEtryATz7f9QJE5wXSk9SFQdghbFCFMGY-Vzy9OLJthDXsOJzAVDtxsUfbiygM9gsTmpUooepylv2My1AcZcYO_65CYEs35mox75ZHO4lZVp_pcA9WaB7TafSoXfYxPg'
     });
     let url = 'https://api.spotify.com/v1/browse/new-releases';
     return this.http.get(url, { headers });
+  }
 
+  getArtista(termino: string) {
+    const headers = new HttpHeaders ({
+      'Authorization':'Bearer BQD94wBXjF-bSfqYEihe1XHLsK80I1L8iqGEtryATz7f9QJE5wXSk9SFQdghbFCFMGY-Vzy9OLJthDXsOJzAVDtxsUfbiygM9gsTmpUooepylv2My1AcZcYO_65CYEs35mox75ZHO4lZVp_pcA9WaB7TafSoXfYxPg'
+    });
+    let url = 'https://api.spotify.com/v1/search';
+    let params = "?q="+termino+"&type=artist";
+    return this.http.get(url + params, { headers });
   }
 }
