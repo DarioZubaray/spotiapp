@@ -12,22 +12,21 @@ export class SpotifyService {
     console.log('Spotify service ready!');
   };
 
-  getRequest() {
+  getQuery( query: string) {
+    const url = `https://api.spotify.com/v1/${query}`;
     const headers = new HttpHeaders ({
       'Authorization':'Bearer BQD94wBXjF-bSfqYEihe1XHLsK80I1L8iqGEtryATz7f9QJE5wXSk9SFQdghbFCFMGY-Vzy9OLJthDXsOJzAVDtxsUfbiygM9gsTmpUooepylv2My1AcZcYO_65CYEs35mox75ZHO4lZVp_pcA9WaB7TafSoXfYxPg'
     });
-    let url = 'https://api.spotify.com/v1/browse/new-releases';
-    return this.http.get(url, { headers })
+    return this.http.get(url, { headers });
+  }
+
+  getRequest() {
+    return this.getQuery('browse/new-releases')
             .pipe( map( data => data['albums'].items));
   }
 
   getArtista(termino: string) {
-    const headers = new HttpHeaders ({
-      'Authorization':'Bearer BQD94wBXjF-bSfqYEihe1XHLsK80I1L8iqGEtryATz7f9QJE5wXSk9SFQdghbFCFMGY-Vzy9OLJthDXsOJzAVDtxsUfbiygM9gsTmpUooepylv2My1AcZcYO_65CYEs35mox75ZHO4lZVp_pcA9WaB7TafSoXfYxPg'
-    });
-    let url = 'https://api.spotify.com/v1/search';
-    let params = "?q="+termino+"&type=artist";
-    return this.http.get(url + params, { headers })
+    return this.getQuery(`search?q=${termino}&type=artist`)
             .pipe( map( (data: any) => {
               return data.artists.items;
             }));
