@@ -18,7 +18,7 @@ export class SearchComponent {
   buscar(termino: string){
     this.loading = true;
     console.log('buscando: ' + termino);
-    this.spotiSer.getArtista(termino).subscribe( (data : any) => {
+    this.spotiSer.getArtistas(termino).subscribe( (data : any) => {
       console.log(data);
       this.artistas = data;
       this.loading = false;
